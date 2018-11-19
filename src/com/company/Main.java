@@ -10,17 +10,6 @@ public class Main {
 
     static String[][] chessBoard;
 
-//            = {
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//            {" ", " ", " ", " ", " ", " ", " ", " "},
-//    };
-
     public static void main(String[] args) {
 
         makeBoard(8, 8);
@@ -34,11 +23,8 @@ public class Main {
 
     public static void makeBoard(int x, int y) {
         chessBoard = new String[y][x];
-        for (int i = 0; i < y; i++){
-            for (int j = 0; j < x; j++) {
-                chessBoard[i][j] = " ";
-            }
-        }
+
+        IntStream.range(0, y).boxed().forEach(i -> IntStream.range(0, x).boxed().forEach(j -> chessBoard[i][j] = " "));
     }
 
     public static int[] readPositionFromConsole() {
@@ -61,7 +47,7 @@ public class Main {
             int x = Arrays.asList(positions).indexOf(xs) == -1 ? -1 : Arrays.asList(positions).indexOf(xs)+1;
             int y = Integer.parseInt(ys);
 
-            if(x > 0 && x <= 8 && y <= 8) {
+            if (x > 0 && x <= 8 && y <= 8) {
                 int[] array = {x, y};
                 return array;
             }
