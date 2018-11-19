@@ -2,31 +2,43 @@ package com.company;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
 
     static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
 
-    static String[][] chessBoard = {
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " "},
-    };
+    static String[][] chessBoard;
+
+//            = {
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//            {" ", " ", " ", " ", " ", " ", " ", " "},
+//    };
 
     public static void main(String[] args) {
 
-
+        makeBoard(8, 8);
         printChessBoard();
 
         addQueen(readPositionFromConsole());
         printChessBoard();
 
 
+    }
+
+    public static void makeBoard(int x, int y) {
+        chessBoard = new String[y][x];
+        for (int i = 0; i < y; i++){
+            for (int j = 0; j < x; j++) {
+                chessBoard[i][j] = " ";
+            }
+        }
     }
 
     public static int[] readPositionFromConsole() {
@@ -61,22 +73,22 @@ public class Main {
 
     public static void addQueen(int[] pos) {
         if (pos[0] != 0) {
-            chessBoard[pos[1]-1][pos[0]-1] = "*";
+            chessBoard[pos[1]-1][pos[0]-1] = "♛";
         }
     }
 
     public static void printChessBoard() {
         System.out.print(" ");
         for (String a : positions) {
-            System.out.print("   " + a);
+            System.out.print("   " + a.toUpperCase());
         }
 
         System.out.print("\n  +");
-        for (int i = 0; i < chessBoard.length*4-1; i++) {
-            System.out.print('-');
+        for (int i = 0; i < chessBoard.length; i++) {
+            System.out.print("---+");
         }
 
-        System.out.println('+');
+        System.out.println();
 
         for (int i = 0; i < chessBoard.length; i++) {
             System.out.print(i+1 + " ");
@@ -84,10 +96,10 @@ public class Main {
                 System.out.print("| " + chessBoard[i][j] + " ");
             }
             System.out.print("|\n  +");
-            for (int y = 0; y < chessBoard.length*4-1; y++) {
-                System.out.print('-');
+            for (int y = 0; y < chessBoard.length; y++) {
+                System.out.print("---+");
             }
-            System.out.print("+\n");
+            System.out.println();
         }
         System.out.println("\n\n\n");
     }
