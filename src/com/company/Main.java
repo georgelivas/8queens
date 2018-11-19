@@ -1,18 +1,21 @@
 package com.company;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
 
-    static char[] positions = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+    static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
 
-    static char[][] chessBoard = {
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+    static String[][] chessBoard = {
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
     };
 
     public static void main(String[] args) {
@@ -20,20 +23,51 @@ public class Main {
 
         printChessBoard();
 
-        addQueen(4, 3);
-        System.out.println("adding a queen  at pos. e4");
+        addQueen(readPositionFromConsole());
         printChessBoard();
+
+
     }
 
-    // public static
+    public static int[] readPositionFromConsole() {
+        Scanner sc = new Scanner(System.in);
 
-    public static void addQueen(int x, int y) {
-        chessBoard[y][x] = '*';
+        System.out.println("Enter a position on the board.  (i.e. E2)");
+
+        String pos = sc.nextLine();
+
+        return validatePosition(pos);
+    }
+
+    public static int[] validatePosition(String position) {
+        char[] pos = position.toCharArray();
+
+        if (pos.length == 2) {
+            String xs = "" + pos[0];
+            xs = xs.toLowerCase();
+            String ys = "" + pos[1];
+            int x = Arrays.asList(positions).indexOf(xs) == -1 ? -1 : Arrays.asList(positions).indexOf(xs)+1;
+            int y = Integer.parseInt(ys);
+
+            if(x > 0 && x <= 8 && y <= 8) {
+                int[] array = {x, y};
+                return array;
+            }
+
+        }
+        int[] array = {0, 0};
+        return array;
+    }
+
+    public static void addQueen(int[] pos) {
+        if (pos[0] != 0) {
+            chessBoard[pos[1]-1][pos[0]-1] = "*";
+        }
     }
 
     public static void printChessBoard() {
         System.out.print(" ");
-        for (char a : positions) {
+        for (String a : positions) {
             System.out.print("   " + a);
         }
 
