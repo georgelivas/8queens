@@ -15,8 +15,8 @@ public class Main {
         makeBoard(8, 8);
         printChessBoard();
 
-        addQueen(readPositionFromConsole());
-        printChessBoard();
+        // addQueen(readPositionFromConsole());
+        // printChessBoard();
 
 
     }
@@ -65,28 +65,28 @@ public class Main {
 
     public static void printChessBoard() {
         System.out.print(" ");
-        for (String a : positions) {
-            System.out.print("   " + a.toUpperCase());
-        }
+        Arrays.asList(positions).stream().forEach(a -> System.out.print("   " + a.toUpperCase()));
 
         System.out.print("\n  +");
-        for (int i = 0; i < chessBoard.length; i++) {
-            System.out.print("---+");
-        }
+
+        IntStream.range(0, chessBoard.length).boxed().forEach(e -> System.out.print("---+"));
 
         System.out.println();
 
-        for (int i = 0; i < chessBoard.length; i++) {
-            System.out.print(i+1 + " ");
-            for (int j = 0; j < chessBoard[i].length; j++) {
-                System.out.print("| " + chessBoard[i][j] + " ");
-            }
-            System.out.print("|\n  +");
-            for (int y = 0; y < chessBoard.length; y++) {
-                System.out.print("---+");
-            }
-            System.out.println();
-        }
-        System.out.println("\n\n\n");
+        Arrays.asList(chessBoard)
+                .stream()
+                .forEach(a -> {
+                    System.out.print(Arrays.asList(chessBoard).indexOf(a)+1 + " ");
+
+                    Arrays.asList(a).stream().forEach(e -> System.out.print("| " + e + " "));
+
+                    System.out.print("|");
+                    System.out.print("\n  +");
+
+                    IntStream.range(0, chessBoard.length).boxed().forEach(e -> System.out.print("---+"));
+
+                    System.out.println();
+                });
+        System.out.println("\n");
     }
 }
