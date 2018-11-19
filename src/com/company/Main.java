@@ -81,19 +81,7 @@ public class Main {
         for (int i = 0; i < chessBoard.length; i++) {
             System.out.print(i+1 + " ");
             for (int j = 0; j < chessBoard[i].length; j++) {
-                if(i%2 ==0) {
-                    if (j % 2 == 0) {
-                        System.out.print("| " + "\033[40m" + chessBoard[i][j] + "\033[0m" + " ");
-                    } else {
-                        System.out.print("| " + chessBoard[i][j] + " ");
-                    }
-                } else {
-                    if (j % 2 == 1) {
-                        System.out.print("| " + "\033[40m" + chessBoard[i][j] + "\033[0m" + " ");
-                    } else {
-                        System.out.print("| " + chessBoard[i][j] + " ");
-                    }
-                }
+                System.out.print("| " + chessBoard[i][j] + " ");
             }
             System.out.print("|\n  +");
             for (int y = 0; y < chessBoard.length*4-1; y++) {
