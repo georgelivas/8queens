@@ -5,20 +5,16 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Main {
-
     static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
 
     static String[][] chessBoard;
 
     public static void main(String[] args) {
-
         makeBoard(8, 8);
         printChessBoard();
 
-        // addQueen(readPositionFromConsole());
-        // printChessBoard();
-
-
+        addQueen(readPositionFromConsole());
+        printChessBoard();
     }
 
     public static void makeBoard(int x, int y) {
@@ -51,7 +47,6 @@ public class Main {
                 int[] array = {x, y};
                 return array;
             }
-
         }
         int[] array = {0, 0};
         return array;
