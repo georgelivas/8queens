@@ -17,6 +17,10 @@ public class Main {
 
         addQueen(readPositionFromConsole());
         printChessBoard();
+
+        fillWithQueens(9);
+
+        printChessBoard();
     }
 
     public static void makeBoard(int y) {
@@ -57,24 +61,8 @@ public class Main {
         int x = pos[0]-1;
         int y = pos[1]-1;
 
-        if (pos[0] != 0) {
+        if (pos[0] != 0 && board.get(y).get(x).isAvailable()) {
             board.get(y).get(x).setContent("♛");
-            // code in development
-//            for (int i = 0; i < 8; i++) {
-//                for (int j = 0; j < 8; j++) {
-//                    for (int k = 0; k < 8; k++) {
-//                        if (((i == y || j == x )
-//                                || (i == y + k && j == x + k)
-//                                || (i == y + k && j == x - k)
-//                                || (i == y - k && j == x + k)
-//                                || (i == y - k && j == x - k))
-//                                && board.get(i).get(j).isAvailable()) {
-//                            board.get(i).get(j).setContent(".");
-//                        }
-//                    }
-//                }
-//            }
-
             IntStream.range(0, 8).boxed().forEach(i ->
                     IntStream.range(0, 8).boxed().forEach(j ->
                             IntStream.range(0, 8).boxed().forEach(k -> {
@@ -87,10 +75,20 @@ public class Main {
                                     board.get(i).get(j).setContent(".");
                                 }
                             })
-                            )
+                    )
             );
-            ////
         }
+    }
+
+    public static void fillWithQueens(int numOfQueens) {
+        IntStream.range(0, numOfQueens).boxed().forEach(i ->
+                IntStream.rangeClosed(1, 8).boxed().forEach(j ->
+                        IntStream.rangeClosed(1, 8).boxed().forEach(y -> {
+                            int[] pos = {y, j};
+                            addQueen(pos);
+                        })
+                )
+        );
     }
 
     public static void printChessBoard() {
