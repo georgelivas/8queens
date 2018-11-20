@@ -18,8 +18,7 @@ public class Main {
         addQueen(readPositionFromConsole());
         printChessBoard();
 
-        fillWithQueens(9);
-
+        fillWithQueens(8);
         printChessBoard();
     }
 
@@ -30,9 +29,7 @@ public class Main {
 
     public static int[] readPositionFromConsole() {
         Scanner sc = new Scanner(System.in);
-
         System.out.println("Enter a position on the board.  (i.e. E2)");
-
         String pos = sc.nextLine();
 
         return validatePosition(pos);
@@ -72,7 +69,8 @@ public class Main {
                                         || (i == y - k && j == x + k)
                                         || (i == y - k && j == x - k))
                                         && board.get(i).get(j).isAvailable()) {
-                                    board.get(i).get(j).setContent(".");
+                                    // board.get(i).get(j).setContent(".");
+                                    board.get(i).get(j).setAvailable(false);
                                 }
                             })
                     )
