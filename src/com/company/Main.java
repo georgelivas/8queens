@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import static java.lang.System.out;
+
 public class Main {
     static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
 
@@ -15,10 +17,10 @@ public class Main {
         makeBoard(8);
         printChessBoard();
 
-        addQueen(readPositionFromConsole());
+        addQueen(readPositionFromConsole(), true);
         printChessBoard();
 
-        fillWithQueens(8);
+        fillWithQueens();
         printChessBoard();
     }
 
@@ -29,7 +31,7 @@ public class Main {
 
     public static int[] readPositionFromConsole() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a position on the board.  (i.e. E2)");
+        out.println("Enter a position on the board.  (i.e. E2)");
         String pos = sc.nextLine();
 
         return validatePosition(pos);
@@ -54,12 +56,12 @@ public class Main {
         return array;
     }
 
-    public static void addQueen(int[] pos) {
+    public static void addQueen(int[] pos, boolean byUser) {
         int x = pos[0]-1;
         int y = pos[1]-1;
 
         if (pos[0] != 0 && board.get(y).get(x).isAvailable()) {
-            board.get(y).get(x).setContent("♛");
+            board.get(y).get(x).setContent(byUser ? "♛" : "♕");
             IntStream.range(0, 8).boxed().forEach(i ->
                     IntStream.range(0, 8).boxed().forEach(j ->
                             IntStream.range(0, 8).boxed().forEach(k -> {
@@ -78,40 +80,40 @@ public class Main {
         }
     }
 
-    public static void fillWithQueens(int numOfQueens) {
-        IntStream.range(0, numOfQueens).boxed().forEach(i ->
+    public static void fillWithQueens() {
+        IntStream.range(0, 8).boxed().forEach(i ->
                 IntStream.rangeClosed(1, 8).boxed().forEach(j ->
                         IntStream.rangeClosed(1, 8).boxed().forEach(y -> {
                             int[] pos = {y, j};
-                            addQueen(pos);
+                            addQueen(pos, false);
                         })
                 )
         );
     }
 
     public static void printChessBoard() {
-        System.out.print(" ");
-        Arrays.asList(positions).stream().forEach(a -> System.out.print("   " + a.toUpperCase()));
+        out.print(" ");
+        Arrays.asList(positions).stream().forEach(a -> out.print("   " + a.toUpperCase()));
 
-        System.out.print("\n  +");
+        out.print("\n  +");
 
-        IntStream.range(0, board.size()).boxed().forEach(e -> System.out.print("---+"));
+        IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
 
-        System.out.println();
+        out.println();
 
             board.stream()
                 .forEach(a -> {
-                    System.out.print(board.indexOf(a)+1 + " ");
+                    out.print(board.indexOf(a)+1 + " ");
 
-                    a.stream().forEach(e -> System.out.print("| " + e + " "));
+                    a.stream().forEach(e -> out.print("| " + e + " "));
 
-                    System.out.print("|");
-                    System.out.print("\n  +");
+                    out.print("|");
+                    out.print("\n  +");
 
-                    IntStream.range(0, board.size()).boxed().forEach(e -> System.out.print("---+"));
+                    IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
 
-                    System.out.println();
+                    out.println();
                 });
-        System.out.println("\n");
+        out.println("\n");
     }
 }
