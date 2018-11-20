@@ -59,7 +59,6 @@ public class Main {
 
         if (pos[0] != 0) {
             board.get(y).get(x).setContent("♛");
-            board.get(y).get(x).setAvailable(false);
             // code in development
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {

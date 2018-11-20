@@ -9,11 +9,12 @@ public class Cell {
     }
 
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     public void setContent(String content) {
         this.content = content;
+        setAvailable(false);
     }
 
     public boolean isAvailable() {
@@ -26,6 +27,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return content;
+        return getContent();
     }
 }
