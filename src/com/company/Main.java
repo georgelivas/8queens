@@ -12,14 +12,14 @@ public class Main {
     static List<List<Cell>> board = new ArrayList<>();
 
     public static void main(String[] args) {
-        makeBoard(8, 8);
+        makeBoard(8);
         printChessBoard();
 
         addQueen(readPositionFromConsole());
         printChessBoard();
     }
 
-    public static void makeBoard(int x, int y) {
+    public static void makeBoard(int y) {
         IntStream.range(0, y).boxed().forEach(i -> {List<Cell> t = new ArrayList<Cell>(); board.add(t);});
         IntStream.range(0, y).boxed().forEach(i -> board.stream().forEach(e -> e.add(new Cell(" "))));
     }
@@ -60,20 +60,35 @@ public class Main {
         if (pos[0] != 0) {
             board.get(y).get(x).setContent("♛");
             // code in development
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    for (int k = 0; k < 8; k++) {
-                        if (((i == y || j == x )
-                                || (i == y + k && j == x + k)
-                                || (i == y + k && j == x - k)
-                                || (i == y - k && j == x + k)
-                                || (i == y - k && j == x - k))
-                                && board.get(i).get(j).isAvailable()) {
-                            board.get(i).get(j).setContent(".");
-                        }
-                    }
-                }
-            }
+//            for (int i = 0; i < 8; i++) {
+//                for (int j = 0; j < 8; j++) {
+//                    for (int k = 0; k < 8; k++) {
+//                        if (((i == y || j == x )
+//                                || (i == y + k && j == x + k)
+//                                || (i == y + k && j == x - k)
+//                                || (i == y - k && j == x + k)
+//                                || (i == y - k && j == x - k))
+//                                && board.get(i).get(j).isAvailable()) {
+//                            board.get(i).get(j).setContent(".");
+//                        }
+//                    }
+//                }
+//            }
+
+            IntStream.range(0, 8).boxed().forEach(i ->
+                    IntStream.range(0, 8).boxed().forEach(j ->
+                            IntStream.range(0, 8).boxed().forEach(k -> {
+                                if (((i == y || j == x)
+                                        || (i == y + k && j == x + k)
+                                        || (i == y + k && j == x - k)
+                                        || (i == y - k && j == x + k)
+                                        || (i == y - k && j == x - k))
+                                        && board.get(i).get(j).isAvailable()) {
+                                    board.get(i).get(j).setContent(".");
+                                }
+                            })
+                            )
+            );
             ////
         }
     }
