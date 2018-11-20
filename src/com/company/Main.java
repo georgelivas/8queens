@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 public class Main {
     static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
 
-    // static String[][] chessBoard;
-
     static List<List<Cell>> board = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -22,10 +20,7 @@ public class Main {
     }
 
     public static void makeBoard(int x, int y) {
-        // chessBoard = new String[y][x];
-
         IntStream.range(0, y).boxed().forEach(i -> {List<Cell> t = new ArrayList<Cell>(); board.add(t);});
-
         IntStream.range(0, y).boxed().forEach(i -> board.stream().forEach(e -> e.add(new Cell(" "))));
     }
 
@@ -60,7 +55,6 @@ public class Main {
 
     public static void addQueen(int[] pos) {
         if (pos[0] != 0) {
-            // chessBoard[pos[1]-1][pos[0]-1] = "♛";
             board.get(pos[1]-1).get(pos[0]-1).setContent("♛");
             board.get(pos[1]-1).get(pos[0]-1).setAvailable(false);
         }
@@ -75,21 +69,6 @@ public class Main {
         IntStream.range(0, board.size()).boxed().forEach(e -> System.out.print("---+"));
 
         System.out.println();
-
-//        Arrays.asList(chessBoard)
-//                .stream()
-//                .forEach(a -> {
-//                    System.out.print(Arrays.asList(chessBoard).indexOf(a)+1 + " ");
-//
-//                    Arrays.asList(a).stream().forEach(e -> System.out.print("| " + e + " "));
-//
-//                    System.out.print("|");
-//                    System.out.print("\n  +");
-//
-//                    IntStream.range(0, chessBoard.length).boxed().forEach(e -> System.out.print("---+"));
-//
-//                    System.out.println();
-//                });
 
             board.stream()
                 .forEach(a -> {
