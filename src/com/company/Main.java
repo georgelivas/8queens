@@ -57,6 +57,28 @@ public class Main {
         if (pos[0] != 0) {
             board.get(pos[1]-1).get(pos[0]-1).setContent("♛");
             board.get(pos[1]-1).get(pos[0]-1).setAvailable(false);
+            // code in development
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if ((i == pos[1]-1 || j == pos[0]-1 ) && board.get(i).get(j).isAvailable()) {
+                        board.get(i).get(j).setContent(".");
+                    }
+                    for (int y = 0; y < 8; y++) {
+                        if (i == pos[1] - 1 + y && j == pos[0] - 1 + y && board.get(i).get(j).isAvailable()) {
+                            board.get(i).get(j).setContent(".");
+                        }
+                        if (i == pos[1] - 1 + y && j == pos[0] - 1 - y && board.get(i).get(j).isAvailable()) {
+                            board.get(i).get(j).setContent(".");
+                        }
+                        if (i == pos[1] - 1 - y && j == pos[0] - 1 + y && board.get(i).get(j).isAvailable()) {
+                            board.get(i).get(j).setContent(".");
+                        }
+                        if (i == pos[1] - 1 - y && j == pos[0] - 1 - y && board.get(i).get(j).isAvailable()) {
+                            board.get(i).get(j).setContent(".");
+                        }
+                    }
+                }
+            }
         }
     }
 
