@@ -63,20 +63,13 @@ public class Main {
             // code in development
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-                    if ((i == y || j == x ) && board.get(i).get(j).isAvailable()) {
-                        board.get(i).get(j).setContent(".");
-                    }
                     for (int k = 0; k < 8; k++) {
-                        if (i == y + k && j == x + k && board.get(i).get(j).isAvailable()) {
-                            board.get(i).get(j).setContent(".");
-                        }
-                        if (i == y + k && j == x - k && board.get(i).get(j).isAvailable()) {
-                            board.get(i).get(j).setContent(".");
-                        }
-                        if (i == y - k && j == x + k && board.get(i).get(j).isAvailable()) {
-                            board.get(i).get(j).setContent(".");
-                        }
-                        if (i == y - k && j == x - k && board.get(i).get(j).isAvailable()) {
+                        if (((i == y || j == x )
+                                || (i == y + k && j == x + k)
+                                || (i == y + k && j == x - k)
+                                || (i == y - k && j == x + k)
+                                || (i == y - k && j == x - k))
+                                && board.get(i).get(j).isAvailable()) {
                             board.get(i).get(j).setContent(".");
                         }
                     }
