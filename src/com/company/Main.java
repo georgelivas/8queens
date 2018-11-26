@@ -41,9 +41,9 @@ public class Main {
         char[] pos = position.toCharArray();
 
         if (pos.length == 2) {
-            String xs = "" + pos[0];
+            String xs = Character.toString(pos[0]);
             xs = xs.toLowerCase();
-            String ys = "" + pos[1];
+            String ys = Character.toString(pos[1]);
             int x = Arrays.asList(positions).indexOf(xs) == -1 ? -1 : Arrays.asList(positions).indexOf(xs)+1;
             int y = Integer.parseInt(ys);
 
@@ -71,8 +71,8 @@ public class Main {
                                         || (i == y - k && j == x + k)
                                         || (i == y - k && j == x - k))
                                         && board.get(i).get(j).isAvailable()) {
-                                    // board.get(i).get(j).setContent(".");
-                                    board.get(i).get(j).setAvailable(false);
+                                    board.get(i).get(j).setContent(".");
+                                    // board.get(i).get(j).setAvailable(false);
                                 }
                             })
                     )
