@@ -9,12 +9,12 @@ import java.util.stream.IntStream;
 import static java.lang.System.out;
 
 public class Main {
-    static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    private static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
 
-    static List<List<Cell>> board = new ArrayList<>();
+    private static List<List<Cell>> board = new ArrayList<>();
 
     public static void main(String[] args) {
-        makeBoard(8);
+        makeBoard();
         printChessBoard();
 
         addQueen(readPositionFromConsole(), true);
@@ -24,9 +24,9 @@ public class Main {
         printChessBoard();
     }
 
-    private static void makeBoard(int y) {
-        IntStream.range(0, y).boxed().forEach(i -> {List<Cell> t = new ArrayList<Cell>(); board.add(t);});
-        IntStream.range(0, y).boxed().forEach(i -> board.stream().forEach(e -> e.add(new Cell(" "))));
+    private static void makeBoard() {
+        IntStream.range(0, 8).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
+        IntStream.range(0, 8).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" "))));
     }
 
     private static int[] readPositionFromConsole() {
