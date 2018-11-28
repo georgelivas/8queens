@@ -44,8 +44,6 @@ public class Main {
             int x = positions.indexOf(Character.toString(pos[0]).toLowerCase())+1;
             int y = Integer.parseInt(Character.toString(pos[1]));
 
-            out.println(x);
-
             if (x > 0 && x <= 8 && y <= 8) {
                 return new int[]{x, y};
             }
@@ -93,7 +91,6 @@ public class Main {
         positions.forEach(a -> out.print("   " + a.toUpperCase()));
 
         out.print("\n  +");
-
         IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
 
         out.println();
