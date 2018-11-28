@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import static java.lang.System.out;
 
 public class Main {
-    private static String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    private static List<String> positions = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 
     private static List<List<Cell>> board = new ArrayList<>();
 
@@ -41,11 +41,10 @@ public class Main {
         char[] pos = position.toCharArray();
 
         if (pos.length == 2) {
-            String xs = Character.toString(pos[0]);
-            xs = xs.toLowerCase();
-            String ys = Character.toString(pos[1]);
-            int x = Arrays.asList(positions).indexOf(xs) == -1 ? -1 : Arrays.asList(positions).indexOf(xs)+1;
-            int y = Integer.parseInt(ys);
+            int x = positions.indexOf(Character.toString(pos[0]).toLowerCase())+1;
+            int y = Integer.parseInt(Character.toString(pos[1]));
+
+            out.println(x);
 
             if (x > 0 && x <= 8 && y <= 8) {
                 return new int[]{x, y};
@@ -82,17 +81,16 @@ public class Main {
     private static void fillWithQueens() {
         IntStream.range(0, 8).boxed().forEach(i ->
                 IntStream.rangeClosed(1, 8).boxed().forEach(j ->
-                        IntStream.rangeClosed(1, 8).boxed().forEach(y -> {
-                            int[] pos = {y, j};
-                            addQueen(pos, false);
-                        })
+                        IntStream.rangeClosed(1, 8).boxed().forEach(y ->
+                                addQueen(new int[]{y, j}, false)
+                        )
                 )
         );
     }
 
     private static void printChessBoard() {
         out.print(" ");
-        Arrays.asList(positions).forEach(a -> out.print("   " + a.toUpperCase()));
+        positions.forEach(a -> out.print("   " + a.toUpperCase()));
 
         out.print("\n  +");
 
@@ -100,19 +98,19 @@ public class Main {
 
         out.println();
 
-            board
-                .forEach(a -> {
-                    out.print(board.indexOf(a)+1 + " ");
+        board.forEach(a -> {
+                out.print(board.indexOf(a)+1 + " ");
 
-                    a.forEach(e -> out.print("| " + e + " "));
+                a.forEach(e -> out.print("| " + e + " "));
 
-                    out.print("|");
-                    out.print("\n  +");
+                out.print("|");
+                out.print("\n  +");
 
-                    IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
+                IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
 
-                    out.println();
-                });
+                out.println();
+        });
+
         out.println("\n");
     }
 }
