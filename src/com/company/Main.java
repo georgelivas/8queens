@@ -85,26 +85,22 @@ public class Main {
 
     private static void printChessBoard() {
         out.print(" ");
+
         positions.forEach(a -> out.print("   " + a.toUpperCase()));
-
         out.print("\n  +");
-        IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
 
+        IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
         out.println();
 
         board.forEach(a -> {
                 out.print(board.indexOf(a)+1 + " ");
 
                 a.forEach(e -> out.print("| " + e + " "));
-
-                out.print("|");
-                out.print("\n  +");
+                out.print("|\n  +");
 
                 IntStream.range(0, board.size()).boxed().forEach(e -> out.print("---+"));
-
                 out.println();
         });
-
         out.println("\n");
     }
 }
