@@ -6,43 +6,34 @@ import java.util.stream.IntStream;
 import static java.lang.System.out;
 
 public class Main {
-    private static List<String> positions = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
-
     private static List<Board> solutions = new ArrayList<>();
     private static Board board = new Board(8);
 
     public static void main(String[] args) {
-//        makeBoard();
-//        printChessBoard();
-//
-//        addQueen(readPositionFromConsole(), true);
-//        printChessBoard();
-//
-//        fillWithQueens();
-//        printChessBoard();
-
         findAllSolutions(board.getSize());
 
         // solutions.forEach(Board::printChessBoard);
         out.println("Found " + solutions.size() + " possible solutions.");
+
         int[] pos = readPositionFromConsole();
-        board.addQueen(pos, false);
+
+        board.addQueen(pos, true);
         board.printChessBoard();
 
         solutions.stream().filter(b -> b.isAMatch(pos)).forEach(Board::printChessBoard);
     }
 
-    public static void findAllSolutions(int boardSize) {
+    private static void findAllSolutions(int boardSize) {
         backtrack(new int[boardSize], 0);
     }
 
-    public static boolean isAccurate(int[] q, int pos) {
+    private static boolean isAccurate(int[] q, int pos) {
         for (int i = 0; i < pos; i++) {
             if (q[i] == q[pos]) { // same column
                 return false;
             } else if ((q[i] - q[pos]) == (pos - i)) { // same major diagonal
                 return false;
-            }else if ((q[pos] - q[i]) == (pos - i)) { // same minor diagonal
+            } else if ((q[pos] - q[i]) == (pos - i)) { // same minor diagonal
                 return false;
             }
         }
@@ -51,7 +42,7 @@ public class Main {
     }
 
 
-    public static void saveBoard(int[] q) {
+    private static void saveBoard(int[] q) {
         Board b = new Board(q.length);
 
         IntStream.range(0, q.length).boxed().forEach(i ->
@@ -64,7 +55,7 @@ public class Main {
         solutions.add(b);
     }
 
-    public static void backtrack(int[] q, int pos) {
+    private static void backtrack(int[] q, int pos) {
         if (pos == q.length) {
             saveBoard(q);
         } else {
@@ -89,7 +80,7 @@ public class Main {
         char[] pos = position.toCharArray();
 
         if (pos.length == 2) {
-            int x = positions.indexOf(Character.toString(pos[0]).toLowerCase())+1;
+            int x = board.getPositions().indexOf(Character.toString(pos[0]).toLowerCase())+1;
             int y = Integer.parseInt(Character.toString(pos[1]));
 
             if (x > 0 && x <= 8 && y <= 8) {

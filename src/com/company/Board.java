@@ -12,9 +12,7 @@ public class Board {
 
     public Board(int numOfCells) {
         IntStream.range(0, numOfCells).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
-        IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e ->
-                e.add(new Cell(" ", new int[] {board.indexOf(e), i})))
-        );
+        IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" "))));
     }
 
     public void addQueen(int[] pos, boolean byUser) {
@@ -39,16 +37,6 @@ public class Board {
                     )
             );
         }
-    }
-
-    private void fillWithQueens() {
-        IntStream.range(0, 8).boxed().forEach(i ->
-                IntStream.rangeClosed(1, 8).boxed().forEach(j ->
-                        IntStream.rangeClosed(1, 8).boxed().forEach(y ->
-                                addQueen(new int[]{y, j}, false)
-                        )
-                )
-        );
     }
 
     public void printChessBoard() {
@@ -76,23 +64,16 @@ public class Board {
         return board.size();
     }
 
+    public List<String> getPositions() {
+        return positions;
+    }
+
     public List<List<Cell>> toList() {
         return this.board;
     }
 
     public boolean isAMatch(int[] pos) {
-        return this.board.get(pos[0]-1).get(pos[1]-1).getContent().equals("♕");
-
-//        for (int i = 0; i < this.getSize(); i++) {
-//            for (int j = 0; j < this.getSize(); j++) {
-//                out.println(board.get(i).get(j));
-//                if (this.board.get(i).get(j).equals(b.toList().get(i).get(j))) {
-//                    out.println(b.toList().get(i).get(j));
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
+        return this.board.get(pos[1]-1).get(pos[0]-1).getContent().equals("♕");
     }
 
     @Override
