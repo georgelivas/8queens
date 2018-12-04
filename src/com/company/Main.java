@@ -25,6 +25,11 @@ public class Main {
 
         // solutions.forEach(Board::printChessBoard);
         out.println("Found " + solutions.size() + " possible solutions.");
+        int[] pos = readPositionFromConsole();
+        board.addQueen(pos, false);
+        board.printChessBoard();
+
+        solutions.stream().filter(b -> b.isAMatch(pos)).forEach(Board::printChessBoard);
     }
 
     public static void findAllSolutions(int boardSize) {
@@ -49,13 +54,13 @@ public class Main {
     public static void saveBoard(int[] q) {
         Board b = new Board(q.length);
 
-        IntStream.range(0, q.length).boxed().forEach(i -> {
+        IntStream.range(0, q.length).boxed().forEach(i ->
             IntStream.range(0, q.length).boxed().forEach(j -> {
                 if (q[i] == j) {
                     b.addQueen(new int[]{i+1, j+1}, false);
                 }
-            });
-        });
+            })
+        );
         solutions.add(b);
     }
 

@@ -12,7 +12,9 @@ public class Board {
 
     public Board(int numOfCells) {
         IntStream.range(0, numOfCells).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
-        IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" ", new int[] {board.indexOf(e), i}))));
+        IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e ->
+                e.add(new Cell(" ", new int[] {board.indexOf(e), i})))
+        );
     }
 
     public void addQueen(int[] pos, boolean byUser) {
@@ -74,33 +76,23 @@ public class Board {
         return board.size();
     }
 
+    public List<List<Cell>> toList() {
+        return this.board;
+    }
 
+    public boolean isAMatch(int[] pos) {
+        return this.board.get(pos[0]-1).get(pos[1]-1).getContent().equals("♕");
 
-    public boolean isAMatch(Board b) {
-        for (int i = 0; i < this.getSize(); i++) {
-            for (int j = 0; j < this.getSize(); j++) {
-                if (this.board.get(i).get(j).equals(b.toList().get(i).get(j))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-
-
-//        boolean tortrn = false;
-//        this.board.forEach(c -> {
-//            c.forEach(cell -> {
-//                b.toList().forEach(x -> {
-//                    x.
+//        for (int i = 0; i < this.getSize(); i++) {
+//            for (int j = 0; j < this.getSize(); j++) {
+//                out.println(board.get(i).get(j));
+//                if (this.board.get(i).get(j).equals(b.toList().get(i).get(j))) {
+//                    out.println(b.toList().get(i).get(j));
+//                    return true;
 //                }
-//            });
-//
-//
-//                if (c.equals(cell.)) {
-//                    tortrn = true;
-//                }
-//            });
-//        });
+//            }
+//        }
+//        return false;
     }
 
     @Override
@@ -114,9 +106,5 @@ public class Board {
     @Override
     public int hashCode() {
         return Objects.hash(board);
-    }
-
-    public List<List<Cell>> toList() {
-        return this.board;
     }
 }
