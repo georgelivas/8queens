@@ -75,23 +75,33 @@ public class Board {
     }
 
 
+
+    public boolean isAMatch(Board b) {
+        for (int i = 0; i < this.getSize(); i++) {
+            for (int j = 0; j < this.getSize(); j++) {
+                if (this.board.get(i).get(j).equals(b.toList().get(i).get(j))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+
+//        boolean tortrn = false;
+//        this.board.forEach(c -> {
+//            c.forEach(cell -> {
+//                b.toList().forEach(x -> {
+//                    x.
+//                }
+//            });
 //
-//    public boolean isAMatch(Board b) {
-////        boolean tortrn = false;
-////        this.board.forEach(c -> {
-////            c.forEach(cell -> {
-////                b.toList().forEach(x -> {
-////                    x.
-////                }
-////            });
-////
-////
-////                if (c.equals(cell.)) {
-////                    tortrn = true;
-////                }
-////            });
-////        });
-//    }
+//
+//                if (c.equals(cell.)) {
+//                    tortrn = true;
+//                }
+//            });
+//        });
+    }
 
     @Override
     public boolean equals(Object o) {

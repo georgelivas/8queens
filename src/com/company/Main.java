@@ -24,7 +24,7 @@ public class Main {
         findAllSolutions(board.getSize());
 
         // solutions.forEach(Board::printChessBoard);
-        out.println(solutions.size());
+        out.println("Found " + solutions.size() + " possible solutions.");
     }
 
     public static void findAllSolutions(int boardSize) {
