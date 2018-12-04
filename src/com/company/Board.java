@@ -12,7 +12,7 @@ public class Board {
 
     public Board(int numOfCells) {
         IntStream.range(0, numOfCells).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
-        IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" "))));
+        IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" ", new int[] {board.indexOf(e), i}))));
     }
 
     public void addQueen(int[] pos, boolean byUser) {
@@ -68,5 +68,45 @@ public class Board {
             out.println();
         });
         out.println("\n");
+    }
+
+    public int getSize() {
+        return board.size();
+    }
+
+
+//
+//    public boolean isAMatch(Board b) {
+////        boolean tortrn = false;
+////        this.board.forEach(c -> {
+////            c.forEach(cell -> {
+////                b.toList().forEach(x -> {
+////                    x.
+////                }
+////            });
+////
+////
+////                if (c.equals(cell.)) {
+////                    tortrn = true;
+////                }
+////            });
+////        });
+//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+        Board board1 = (Board) o;
+        return Objects.equals(board, board1.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(board);
+    }
+
+    public List<List<Cell>> toList() {
+        return this.board;
     }
 }

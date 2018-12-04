@@ -21,21 +21,23 @@ public class Main {
 //        fillWithQueens();
 //        printChessBoard();
 
-        findAllSolutions(8);
+        findAllSolutions(board.getSize());
 
-        solutions.forEach(Board::printChessBoard);
+        // solutions.forEach(Board::printChessBoard);
         out.println(solutions.size());
     }
 
-    /////////////////////
+    public static void findAllSolutions(int boardSize) {
+        backtrack(new int[boardSize], 0);
+    }
 
-    public static boolean isConsistent(int[] q, int n) {
-        for (int i = 0; i < n; i++) {
-            if (q[i] == q[n]) { // same column
+    public static boolean isAccurate(int[] q, int pos) {
+        for (int i = 0; i < pos; i++) {
+            if (q[i] == q[pos]) { // same column
                 return false;
-            } else if ((q[i] - q[n]) == (n - i)) { // same major diagonal
+            } else if ((q[i] - q[pos]) == (pos - i)) { // same major diagonal
                 return false;
-            }else if ((q[n] - q[i]) == (n - i)) { // same minor diagonal
+            }else if ((q[pos] - q[i]) == (pos - i)) { // same minor diagonal
                 return false;
             }
         }
@@ -45,10 +47,10 @@ public class Main {
 
 
     public static void saveBoard(int[] q) {
-        int n = q.length;
         Board b = new Board(q.length);
-        IntStream.range(0, n).boxed().forEach(i -> {
-            IntStream.range(0, n).boxed().forEach(j -> {
+
+        IntStream.range(0, q.length).boxed().forEach(i -> {
+            IntStream.range(0, q.length).boxed().forEach(j -> {
                 if (q[i] == j) {
                     b.addQueen(new int[]{i+1, j+1}, false);
                 }
@@ -57,25 +59,18 @@ public class Main {
         solutions.add(b);
     }
 
-    public static void findAllSolutions(int n) {
-        int[] a = new int[n];
-        backtrack(a, 0);
-    }
-
     public static void backtrack(int[] q, int pos) {
         if (pos == q.length) {
             saveBoard(q);
         } else {
             IntStream.range(0, q.length).boxed().forEach(i -> {
                 q[pos] = i;
-                if (isConsistent(q, pos)) {
+                if (isAccurate(q, pos)) {
                     backtrack(q, pos+1);
                 }
             });
         }
     }
-
-    /////////////////////
 
     private static int[] readPositionFromConsole() {
         Scanner sc = new Scanner(System.in);
