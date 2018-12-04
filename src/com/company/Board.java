@@ -60,11 +60,11 @@ public class Board {
         out.println("\n");
     }
 
-    public int getSize() {
+    protected int getSize() {
         return board.size();
     }
 
-    public List<String> getPositions() {
+    protected List<String> getPositions() {
         return positions;
     }
 
@@ -72,7 +72,7 @@ public class Board {
         return this.board;
     }
 
-    public boolean isAMatch(int[] pos) {
+    protected boolean isAMatch(int[] pos) {
         return this.board.get(pos[1]-1).get(pos[0]-1).getContent().equals("♕");
     }
 

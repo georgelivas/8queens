@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.lang.System.out;
 
@@ -13,14 +14,25 @@ public class Main {
         findAllSolutions(board.getSize());
 
         // solutions.forEach(Board::printChessBoard);
-        out.println("Found " + solutions.size() + " possible solutions.");
+        out.println("Found " + solutions.size() + " possible solutions.\n");
 
+        board.printChessBoard();
         int[] pos = readPositionFromConsole();
 
         board.addQueen(pos, true);
-        board.printChessBoard();
 
+
+
+        int length = solutions.stream().filter(b -> b.isAMatch(pos)).toArray().length;
         solutions.stream().filter(b -> b.isAMatch(pos)).forEach(Board::printChessBoard);
+        out.println("There are "
+                + length
+                + " possible solutions with a queen in the position "
+                + board.getPositions().get(pos[0]-1).toUpperCase()
+                + pos[1]
+                + "."
+        );
+
     }
 
     private static void findAllSolutions(int boardSize) {
