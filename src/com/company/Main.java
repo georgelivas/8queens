@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 import static java.lang.System.out;
 
@@ -8,7 +9,7 @@ public class Main {
     private static List<String> positions = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 
     private static List<Board> solutions = new ArrayList<>();
-    private static List<List<Cell>> board = new ArrayList<>();
+    private static Board board = new Board(8);
 
     public static void main(String[] args) {
 //        makeBoard();
@@ -43,21 +44,16 @@ public class Main {
     }
 
 
-    public static void printQueens(int[] q) {
+    public static void saveBoard(int[] q) {
         int n = q.length;
         Board b = new Board(q.length);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        IntStream.range(0, n).boxed().forEach(i -> {
+            IntStream.range(0, n).boxed().forEach(j -> {
                 if (q[i] == j) {
                     b.addQueen(new int[]{i+1, j+1}, false);
-                    //  out.print("Q ");
                 }
-//                } else {
-//                    out.print("* ");
-//                }
-            }
-
-        }
+            });
+        });
         solutions.add(b);
     }
 
@@ -66,16 +62,16 @@ public class Main {
         backtrack(a, 0);
     }
 
-    public static void backtrack(int[] q, int k) {
-        if (k == q.length) {
-            printQueens(q);
+    public static void backtrack(int[] q, int pos) {
+        if (pos == q.length) {
+            saveBoard(q);
         } else {
-            for (int i = 0; i < q.length; i++) {
-                q[k] = i;
-                if (isConsistent(q, k)) {
-                    backtrack(q, k+1);
+            IntStream.range(0, q.length).boxed().forEach(i -> {
+                q[pos] = i;
+                if (isConsistent(q, pos)) {
+                    backtrack(q, pos+1);
                 }
-            }
+            });
         }
     }
 
