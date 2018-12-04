@@ -15,7 +15,7 @@ public class Board {
         IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" "))));
     }
 
-    private void addQueen(int[] pos, boolean byUser) {
+    public void addQueen(int[] pos, boolean byUser) {
         int x = pos[0]-1;
         int y = pos[1]-1;
 
@@ -39,7 +39,17 @@ public class Board {
         }
     }
 
-    private void printChessBoard() {
+    private void fillWithQueens() {
+        IntStream.range(0, 8).boxed().forEach(i ->
+                IntStream.rangeClosed(1, 8).boxed().forEach(j ->
+                        IntStream.rangeClosed(1, 8).boxed().forEach(y ->
+                                addQueen(new int[]{y, j}, false)
+                        )
+                )
+        );
+    }
+
+    public void printChessBoard() {
         out.print(" ");
 
         positions.forEach(a -> out.print("   " + a.toUpperCase()));

@@ -1,15 +1,14 @@
 package com.company;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 import static java.lang.System.out;
 
 public class Main {
     private static List<String> positions = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 
+    private static List<Board> solutions = new ArrayList<>();
     private static List<List<Cell>> board = new ArrayList<>();
-    static int count = 0;
 
     public static void main(String[] args) {
 //        makeBoard();
@@ -21,8 +20,10 @@ public class Main {
 //        fillWithQueens();
 //        printChessBoard();
 
-        calculate(8);
-        out.println(count);
+        findAllSolutions(8);
+
+        solutions.forEach(Board::printChessBoard);
+        out.println(solutions.size());
     }
 
     /////////////////////
@@ -37,27 +38,30 @@ public class Main {
                 return false;
             }
         }
+
         return true;
     }
 
 
     public static void printQueens(int[] q) {
         int n = q.length;
+        Board b = new Board(q.length);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (q[i] == j) {
-                    out.print("Q ");
-                } else {
-                    out.print("* ");
+                    b.addQueen(new int[]{i+1, j+1}, false);
+                    //  out.print("Q ");
                 }
+//                } else {
+//                    out.print("* ");
+//                }
             }
-            out.println();
+
         }
-        out.println();
-        count++;
+        solutions.add(b);
     }
 
-    public static void calculate(int n) {
+    public static void findAllSolutions(int n) {
         int[] a = new int[n];
         backtrack(a, 0);
     }
@@ -76,11 +80,6 @@ public class Main {
     }
 
     /////////////////////
-
-    private static void makeBoard() {
-        IntStream.range(0, 8).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
-        IntStream.range(0, 8).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" "))));
-    }
 
     private static int[] readPositionFromConsole() {
         Scanner sc = new Scanner(System.in);
@@ -103,15 +102,5 @@ public class Main {
         }
 
         return new int[]{0, 0};
-    }
-
-    private static void fillWithQueens() {
-        IntStream.range(0, 8).boxed().forEach(i ->
-                IntStream.rangeClosed(1, 8).boxed().forEach(j ->
-                        IntStream.rangeClosed(1, 8).boxed().forEach(y ->
-                                addQueen(new int[]{y, j}, false)
-                        )
-                )
-        );
     }
 }
