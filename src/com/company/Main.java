@@ -9,17 +9,73 @@ public class Main {
     private static List<String> positions = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 
     private static List<List<Cell>> board = new ArrayList<>();
+    static int count = 0;
 
     public static void main(String[] args) {
-        makeBoard();
-        printChessBoard();
+//        makeBoard();
+//        printChessBoard();
+//
+//        addQueen(readPositionFromConsole(), true);
+//        printChessBoard();
+//
+//        fillWithQueens();
+//        printChessBoard();
 
-        addQueen(readPositionFromConsole(), true);
-        printChessBoard();
-
-        fillWithQueens();
-        printChessBoard();
+        calculate(8);
+        out.println(count);
     }
+
+    /////////////////////
+
+    public static boolean isConsistent(int[] q, int n) {
+        for (int i = 0; i < n; i++) {
+            if (q[i] == q[n]) { // same column
+                return false;
+            } else if ((q[i] - q[n]) == (n - i)) { // same major diagonal
+                return false;
+            }else if ((q[n] - q[i]) == (n - i)) { // same minor diagonal
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static void printQueens(int[] q) {
+        int n = q.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (q[i] == j) {
+                    out.print("Q ");
+                } else {
+                    out.print("* ");
+                }
+            }
+            out.println();
+        }
+        out.println();
+        count++;
+    }
+
+    public static void calculate(int n) {
+        int[] a = new int[n];
+        backtrack(a, 0);
+    }
+
+    public static void backtrack(int[] q, int k) {
+        if (k == q.length) {
+            printQueens(q);
+        } else {
+            for (int i = 0; i < q.length; i++) {
+                q[k] = i;
+                if (isConsistent(q, k)) {
+                    backtrack(q, k+1);
+                }
+            }
+        }
+    }
+
+    /////////////////////
 
     private static void makeBoard() {
         IntStream.range(0, 8).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
