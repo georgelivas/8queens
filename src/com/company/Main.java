@@ -1,9 +1,10 @@
 package com.company;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
+import static java.lang.System.console;
 import static java.lang.System.out;
 
 public class Main {
@@ -39,20 +40,28 @@ public class Main {
         backtrack(new int[boardSize], 0);
     }
 
+//    private static boolean isAccurate(int[] q, int pos) {
+//        for (int i = 0; i < pos; i++) {
+//            if (q[i] == q[pos]) { // same column
+//                return false;
+//            } else if ((q[i] - q[pos]) == (pos - i)) { // same major diagonal
+//                return false;
+//            } else if ((q[pos] - q[i]) == (pos - i)) { // same minor diagonal
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
+
     private static boolean isAccurate(int[] q, int pos) {
-        for (int i = 0; i < pos; i++) {
-            if (q[i] == q[pos]) { // same column
-                return false;
-            } else if ((q[i] - q[pos]) == (pos - i)) { // same major diagonal
-                return false;
-            } else if ((q[pos] - q[i]) == (pos - i)) { // same minor diagonal
-                return false;
-            }
-        }
 
-        return true;
+        return IntStream.range(0, pos).boxed().noneMatch(i ->
+            q[i] == q[pos]
+                    || (q[i] - q[pos]) == (pos - i)
+                    || (q[pos] - q[i]) == (pos - i)
+        );
     }
-
 
     private static void saveBoard(int[] q) {
         Board b = new Board(q.length);
