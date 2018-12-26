@@ -8,12 +8,25 @@ import static java.lang.System.out;
 public class Board {
     private List<String> positions = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 
-    private List<List<Cell>> board = new ArrayList<>();
+    private List<List<Cell>> board;
 
     public Board(int numOfCells) {
+        board = new ArrayList<>();
         IntStream.range(0, numOfCells).boxed().forEach(i -> {List<Cell> t = new ArrayList<>(); board.add(t);});
         IntStream.range(0, numOfCells).boxed().forEach(i -> board.forEach(e -> e.add(new Cell(" "))));
     }
+//
+//    public Board(int[] q) {
+//
+//        board = Arrays.asList(IntStream.range(0, q.length).boxed().flatMap(i ->
+//                IntStream.range(0, q.length).boxed().map(j -> {
+//                    if (q[i] == j) {
+//                       return new int[]{i+1, j+1};
+//                    }
+//                    return new int[];
+//                })
+//        ).toArray());
+//    }
 
     public void addQueen(int[] pos, boolean byUser) {
         int x = pos[0]-1;
