@@ -6,22 +6,24 @@ import java.util.stream.IntStream;
 import static java.lang.System.out;
 
 public class Main {
+    // Solutions is an array of Boards that will be filled with all 92 possible solutions/
     private static List<Board> solutions = new ArrayList<>();
     private static Board board = new Board(8);
 
     public static void main(String[] args) {
+        // call findAllSolutions to find all (92) possible solutions.
         findAllSolutions(board.getSize());
 
-        // solutions.forEach(Board::printChessBoard);
         out.println("Found " + solutions.size() + " possible solutions.\n");
 
+        // read position from user.
         board.printChessBoard();
         int[] pos = readPositionFromConsole();
 
         board.addQueen(pos, true);
 
 
-
+        // inform the user of the amount of solutions matching the user's input.
         int length = solutions.stream().filter(b -> b.isAMatch(pos)).toArray().length;
         solutions.stream().filter(b -> b.isAMatch(pos)).forEach(Board::printChessBoard);
         out.println("There are "
@@ -34,11 +36,12 @@ public class Main {
 
     }
 
+    // findAllSolutions calls the backtrack function to find every possible solution.
     private static void findAllSolutions(int boardSize) {
         backtrack(new int[boardSize], 0);
     }
 
-
+    // isAccurate receives an array of integers and checks if there are any conflicts.
     private static boolean isAccurate(int[] q, int pos) {
         return IntStream.range(0, pos).boxed().noneMatch(i ->
             q[i] == q[pos]
@@ -46,7 +49,9 @@ public class Main {
                     || (q[pos] - q[i]) == (pos - i)
         );
     }
-
+    // saveBoard takes as a parameter an array of integers that correspond
+    // to x and y and adds a queen to an object board, then it adds the
+    // board to the array solutions.
     private static void saveBoard(int[] q) {
         Board b = new Board(q.length);
 
@@ -59,7 +64,8 @@ public class Main {
         );
         solutions.add(b);
     }
-
+    // the method backtrack calls itself (recursion) until the board has 8 queens,
+    // if there is a conflict it won't add a queen and it will proceed to the next column.
     private static void backtrack(int[] q, int pos) {
         if (pos == q.length) {
             saveBoard(q);
@@ -72,7 +78,8 @@ public class Main {
             });
         }
     }
-
+    // readPositionFromConsole reads a position from the console and returns it
+    // in the form of array: [x, y] after it validates it.
     private static int[] readPositionFromConsole() {
         Scanner sc = new Scanner(System.in);
         out.println("Enter a position on the board.  (i.e. E2)");
@@ -81,6 +88,7 @@ public class Main {
         return validatePosition(pos);
     }
 
+    // validatePosition receives a string in a form "e3" and translates it to array [x, y].
     private static int[] validatePosition(String position) {
         char[] pos = position.toCharArray();
 
