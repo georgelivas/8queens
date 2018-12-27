@@ -12,7 +12,7 @@ The solution I used has 3 steps:
 2. receive input from user i.e. E4.
 3. provide all solutions with a queen at cell E4.
 
-
+---
 
 1. To generate the 92 solutions I used a [backtracking](#Backtracking) recursive algorithm
     ```java
