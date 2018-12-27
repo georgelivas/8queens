@@ -1,4 +1,10 @@
-# 8 queens
+# The 8 queens puzzle
+<p align="center">
+    <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-December%2027-orange.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/version-2.1-red.svg"></a>
+    <a align="center" href="http://georgelivas.site"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
+</p>
 
 ## Description
 
