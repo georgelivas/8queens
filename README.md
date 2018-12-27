@@ -1,4 +1,4 @@
-# The 8 queens puzzle
+<h1 align="center"> ♕ The 8 Queens Puzzle ♕ </h1>
 <p align="center">
     <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-December%2027-orange.svg"></a>
