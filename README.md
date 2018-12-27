@@ -127,4 +127,4 @@ boolean solve(Node n) {
 
 
 ## Licence
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/8queens/blob/master/LICENSE) file for details.
