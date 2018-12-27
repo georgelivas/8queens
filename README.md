@@ -1,7 +1,7 @@
 <h1 align="center"> ♕ The 8 Queens Puzzle ♕ </h1>
+
 <p align="center">
     <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
-    <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-December%2027-orange.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/version-2.1-red.svg"></a>
     <a align="center" href="http://georgelivas.site"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
@@ -15,7 +15,7 @@ The eight queens puzzle is the problem of placing eight chess queens on an 8×8 
 The solution I used has 3 steps:
 
 1. generate all (92) possible solutions.
-2. receive input from user i.e. E4.
+2. receive input from user, i.e. E4.
 3. provide all solutions with a queen at cell E4.
 
 ---
@@ -126,11 +126,5 @@ boolean solve(Node n) {
 *  https://en.wikipedia.org/wiki/Backtracking
 
 
-
-
-
-
-
-
-
-a program for the data structures and algorithms module.
+## Licence
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details.
