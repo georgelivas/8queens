@@ -20,7 +20,7 @@ The solution I used has 3 steps:
 
 ---
 
-1. To generate the 92 solutions I used a [backtracking](#Backtracking) recursive algorithm
+1. To generate the 92 solutions I used the following [backtracking](#Backtracking) recursive algorithm
     ```java
     private static void backtrack(int[] q, int pos) {
         if (pos == q.length) {
