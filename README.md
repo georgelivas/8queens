@@ -13,22 +13,81 @@ The solution I used has 3 steps:
 3. provide all solutions with a queen at cell E4.
 
 
-1. To generate the 92 solutions I used a [backtracking](#Backtracking) recursive algorithm
 
-```java
-private static void backtrack(int[] q, int pos) {
-    if (pos == q.length) {
-        saveBoard(q);
-    } else {
-        IntStream.range(0, q.length).boxed().forEach(i -> {
-            q[pos] = i;
-            if (isAccurate(q, pos)) {
-                backtrack(q, pos+1);
-            }
-        });
+1. To generate the 92 solutions I used a [backtracking](#Backtracking) recursive algorithm
+    ```java
+    private static void backtrack(int[] q, int pos) {
+        if (pos == q.length) {
+            saveBoard(q);
+        } else {
+            IntStream.range(0, q.length).boxed().forEach(i -> {
+                q[pos] = i;
+                if (isAccurate(q, pos)) {
+                    backtrack(q, pos+1);
+                }
+            });
+        }
     }
-}
-```
+    ```
+    
+2. Using a ```Scanner``` I read input from the console in the form ```E4``` or ```e4``` then I translate the chess position to an array  ```[x, y]``` and checking if ```0,0 < x,y <  7,7 ```
+
+    ```text
+    i = index
+    
+    i        0   1   2   3   4   5   6   7
+    
+             A   B   C   D   E   F   G   H
+           +---+---+---+---+---+---+---+---+
+    0    1 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    1    2 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    2    3 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    3    4 |   |   |   |   | • |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    4    5 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    5    6 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    6    7 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    7    8 |   |   |   |   |   |   |   |   |
+           +---+---+---+---+---+---+---+---+
+    ```
+    
+    > As shown above the position ```E4``` has coordinates ```[4, 3]```
+
+3.  Since all the possible solutions are stored in an ```ArrayList``` the algorithm must filter all the ```Boards``` with a queen placed at the given location and print them.
+     > The output would be similar to this:
+    
+    ```text
+        ...
+    
+            A   B   C   D   E   F   G   H
+          +---+---+---+---+---+---+---+---+
+        1 |   |   |   | ♕ |   |   |   |   |
+          +---+---+---+---+---+---+---+---+
+        2 |   |   |   |   |   |   | ♕ |   |
+          +---+---+---+---+---+---+---+---+
+        3 |   |   |   |   | ♕ |   |   |   |
+          +---+---+---+---+---+---+---+---+
+        4 |   | ♕ |   |   |   |   |   |   |
+          +---+---+---+---+---+---+---+---+
+        5 |   |   |   |   |   | ♕ |   |   |
+          +---+---+---+---+---+---+---+---+
+        6 | ♕ |   |   |   |   |   |   |   |
+          +---+---+---+---+---+---+---+---+
+        7 |   |   | ♕ |   |   |   |   |   |
+          +---+---+---+---+---+---+---+---+
+        8 |   |   |   |   |   |   |   | ♕ |
+          +---+---+---+---+---+---+---+---+
+        
+        
+        There are 12 possible solutions with a queen in the position E3.
+    
+    ```
 
 ### Backtracking
 
@@ -42,7 +101,7 @@ The backtracking algorithm traverses this search tree recursively, from the root
 
 Therefore, the actual search tree that is traversed by the algorithm is only a part of the potential tree. The total cost of the algorithm is the number of nodes of the actual tree times the cost of obtaining and processing each node. This fact should be considered when choosing the potential search tree and implementing the pruning test.
 
-### Pseudocode
+#### Pseudocode
 
 ```
 boolean solve(Node n) {
